@@ -1,0 +1,39 @@
+<html>
+<body>
+  <h1>かばんorサーバル</h1>
+  つかいかた<br>
+  セリフを入力すると、かばんちゃんとサーバルちゃんのどっちに似ているか判定してくれるよ！<br>
+  <input type="text" value="ジャンプ力ぅ...ですかねぇ..." id="text">
+  <input type="button" value="送信" id="send" onclick="send()">
+  <h2><div id=resultChara></div></h2>
+  <div id=result></div>
+  <script>
+  function send(){
+    document.getElementById('resultChara').innerHTML = "";
+    document.getElementById('result').innerHTML = "判定中...";
+    text = document.getElementById("text").value;
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "https://script.google.com/macros/s/AKfycbwcOWC-mc22d_d2NgK-v28zboIXe-UKoAclZNeGq8GB8H99n6k/exec?text="+text+"&callback=_callback";
+    function callBack(json){
+      console.log(json.response);
+      if(json.response.result_S==json.response.result_K){
+        document.getElementById('resultChara').innerHTML = "わかんないよ！";
+        var par = Math.floor(json.response.result_S/(json.response.result_S+json.response.result_K)*10000)/100
+        document.getElementById('result').innerHTML = "サーバル率:50％";
+      }else if(json.response.result_S>json.response.result_K){
+        document.getElementById('resultChara').innerHTML = "サーバル";
+        var par = Math.floor(json.response.result_S/(json.response.result_S+json.response.result_K)*10000)/100
+        document.getElementById('result').innerHTML = "サーバル率:"+par+"%";
+      }else{
+        document.getElementById('resultChara').innerHTML = "かばん";
+        var par = Math.floor(json.response.result_K/(json.response.result_S+json.response.result_K)*10000)/100
+        document.getElementById('result').innerHTML = "かばん率:"+par+"%";
+      }
+    }
+    window._callback = callBack;
+    document.body.appendChild(script);
+  }
+  </script>
+</body>
+</html>
