@@ -5,7 +5,7 @@
   1,セリフを入力してね<br>
   2,二人のどっちに似ているか判定されるよ<br>
   3,たーのしー！<br>
-  <input type="text" value="ジャンプ力ぅ...ですかねぇ..." id="text">
+  <input type="text" value="" id="text">
   <input type="button" value="送信" id="send" onclick="send()"><br><br>
   <div id=sentText></div>
   <h2><div id=resultChara></div></h2>
@@ -26,9 +26,9 @@
       console.log(json.response);
       document.getElementById('sentText').innerHTML = "テキスト:"+text;
       if(json.response.result_S==json.response.result_K){
-        document.getElementById('resultChara').innerHTML = "わかんないよ！";
+        document.getElementById('resultChara').innerHTML = "判定: わかんないよ！";
         var par = Math.floor(json.response.result_S/(json.response.result_S+json.response.result_K)*10000)/100
-        document.getElementById('result').innerHTML = "サーバル率:50％";
+        document.getElementById('result').innerHTML = "サーバルちゃん:"+json.response.result_S+"<br>かばんちゃん　:"+json.response.result_K;
       }else if(json.response.result_S>json.response.result_K){
         document.getElementById('resultChara').innerHTML = "判定: サーバルちゃん";
         var par = Math.floor(json.response.result_S/(json.response.result_S+json.response.result_K)*10000)/100
