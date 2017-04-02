@@ -1,0 +1,10 @@
+@font-face {
+  font-family: 'font1';
+  src: url('../font/GN-KillGothic-U-KanaNA.ttf');
+}
+body{
+  text-align: center;
+  background-color: #ffff99;
+  font-family: 'font1';
+  font-size: 150%;
+}
